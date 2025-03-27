@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  nominatim:
+    image: mediagis/nominatim
+    container_name: nominatim
+    ports:
+      - "5000:8080"
+    environment:
+      - NOMINATIM_IMPORT=1      # Para importar os dados (lembre-se: a primeira importação pode levar tempo)
+      - NOMINATIM_EXTRA_ARGS=--osm-file /data/your_osm_file.osm.pbf   # Opcional: se você deseja importar um arquivo OSM específico
+    volumes:
+      - nominatim_data:/var/lib/postgresql/12/main
+    restart: unless-stopped
+
+  api:
+    build: ./api
+    container_name: api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - nominatim
+    restart: unless-stopped
+
+volumes:
+  nominatim_data:
