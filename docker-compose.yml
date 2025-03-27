@@ -10,7 +10,7 @@ services:
       - NOMINATIM_IMPORT=1      # Para importar os dados (lembre-se: a primeira importação pode levar tempo)
       - PBF_URL=https://download.geofabrik.de/south-america/brazil-latest.osm.pbf
     volumes:
-      - nominatim_data:/var/lib/postgresql/12/main
+      - nominatim_data:/var/lib/postgresql/16/main
     restart: unless-stopped
 
   api:
