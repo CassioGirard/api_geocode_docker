@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   nominatim:
-    image: mediagis/nominatim
+    image: mediagis/nominatim:4.4.0
     container_name: nominatim
     ports:
       - "5000:8080"
